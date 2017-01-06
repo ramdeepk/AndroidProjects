@@ -103,6 +103,24 @@ public class MainActivity extends AppCompatActivity {
 
     // TODO (5) Override onCreateOptionsMenu to inflate the menu for this Activity
     // TODO (6) Return true to display the menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.forecast, menu);
+        return true;
+    }
 
     // TODO (7) Override onOptionsItemSelected to handle clicks on the refresh button
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemThatWasClickedId = item.getItemId();
+        if (itemThatWasClickedId == R.id.action_refresh) {
+            Context context = MainActivity.this;
+            String textToShow = "Refreshing...";
+            Toast.makeText(context, textToShow, Toast.LENGTH_SHORT).show();
+            mWeatherTextView.setText("");
+            loadWeatherData();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
